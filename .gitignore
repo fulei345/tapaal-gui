@@ -1,0 +1,6 @@
+.gradle
+.idea
+.r
+.bzr-repo
+build
+out

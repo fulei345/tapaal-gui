@@ -1,0 +1,94 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.71'
+    id "ca.coglinc.javacc" version "2.4.0"
+}
+
+group 'net.tapaal'
+version '4.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenCentral()
+}
+
+compileJavacc {
+    inputDirectory = file('src/')
+    //outputDirectory = file(project.buildDir.absolutePath + '/generated/javacc')
+}
+
+//Set the soruce and resource dir
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/', compileJavacc.outputDirectory]
+            exclude("resources/")
+        }
+        resources {
+            //Resources should be in folder called resources, so only add the resources folder
+            //adding srv/resources will places content of the folder in root of jar file
+            srcDirs = ['src/']
+            include("resources/")
+        }
+        test {
+            java {
+                srcDirs = ['tests/']
+            }
+        }
+    }
+}
+
+mainClassName = 'TAPAAL'
+
+jar {
+    exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
+
+    //Sets the main call for the Jar, you can double click to run the jar file
+    manifest {
+        attributes 'Main-Class': 'TAPAAL'
+    }
+    //The following lines makes libs a part of the build jar file (standalone jar)
+    //from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
+
+dependencies {
+    implementation group: 'commons-cli', name: 'commons-cli', version: '1.4'
+    implementation group: 'org.swinglabs.swingx', name: 'swingx-all', version: '1.6.5-1'
+    implementation group: 'net.java.dev.jna', name: 'jna', version: '4.5.1'
+    implementation 'org.jetbrains:annotations:16.0.2'
+    //compile group: 'com.apple', name: 'AppleJavaExtensions', version: '1.4' // Not working
+
+    //Add jars from libs dir
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Junit
+    testImplementation(
+        'org.junit.jupiter:junit-jupiter-api:5.4.2'
+    )
+    testRuntimeOnly(
+        'org.junit.jupiter:junit-jupiter-engine:5.4.2',
+        'org.junit.vintage:junit-vintage-engine:5.4.2'
+    )
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+}
+test {
+    useJUnitPlatform()
+    afterTest { desc, result ->
+        logger.quiet "Executing test ${desc.name} [${desc.className}] with result: ${result.resultType}"
+    }
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_11
+    }
+}
