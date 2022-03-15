@@ -38,7 +38,7 @@ public abstract class Transition extends PlaceTransitionObject {
 	protected int angle;
 
 	// SMC
-	protected int potency;
+	protected int potency = 1;
 	
 	// Animation Suff
 	protected boolean highlightedDelayEnabled = false;
@@ -167,7 +167,7 @@ public abstract class Transition extends PlaceTransitionObject {
 		return potency;
 	}
 
-	public int setPotency(int new_potency) {
+	public void setPotency(int new_potency) {
 		potency = new_potency;
 	}
 
