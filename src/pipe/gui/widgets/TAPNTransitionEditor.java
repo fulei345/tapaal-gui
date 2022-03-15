@@ -327,8 +327,8 @@ public class TAPNTransitionEditor extends JPanel {
 	}
 
 	// SMC
-	private void setPotencySpinnerValue(int potecyNumber) {
-		potencySpinner.setValue(potecyNumber);
+	private void setPotencySpinnerValue(int potencyNumber) {
+		potencySpinner.setValue(potencyNumber);
 	}
 
 	private void nameTextFieldFocusLost(java.awt.event.FocusEvent evt) {
