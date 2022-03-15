@@ -12,6 +12,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JSpinner;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -22,6 +23,7 @@ import net.tapaal.swinghelpers.GridBagHelper;
 import dk.aau.cs.gui.undo.*;
 import net.tapaal.swinghelpers.SwingHelper;
 import net.tapaal.swinghelpers.WidthAdjustingComboBox;
+import net.tapaal.swinghelpers.CustomJSpinner;
 import pipe.gui.CreateGui;
 import pipe.gui.graphicElements.PetriNetObject;
 import pipe.gui.graphicElements.tapn.TimedTransitionComponent;
@@ -84,6 +86,9 @@ public class TAPNTransitionEditor extends JPanel {
 		uncontrollableCheckBox = new JCheckBox("Uncontrollable");
 		attributesCheckBox = new JCheckBox("Show transition name");
 
+		// SMC
+		potencyLabel = new JLabel();
+		potencySpinner = new CustomJSpinner(1, okButton);
 
 		sharedTransitionsComboBox = new WidthAdjustingComboBox<>(maxNumberOfTransitionsToShowAtOnce);
 		SwingHelper.setPreferredWidth(sharedTransitionsComboBox,290);
@@ -143,6 +148,15 @@ public class TAPNTransitionEditor extends JPanel {
 		nameLabel.setText("Name:");
 		gridBagConstraints = GridBagHelper.as(0,1, Anchor.EAST, new Insets(3, 3, 3, 3));
 		transitionEditorPanel.add(nameLabel, gridBagConstraints);
+
+		// SMC
+		potencyLabel.setText("Potency:");
+		gridBagConstraints = GridBagHelper.as(1,2, Anchor.EAST, new Insets(3, 3, 3, 3));
+		transitionEditorPanel.add(potencyLabel, gridBagConstraints);
+
+		setPotencySpinnerValue(transition.getPotency());
+		gridBagConstraints = GridBagHelper.as(2,2, Anchor.EAST, new Insets(3, 3, 3, 3));
+		transitionEditorPanel.add(potencySpinner, gridBagConstraints);
 
 		nameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			@Override
@@ -312,6 +326,11 @@ public class TAPNTransitionEditor extends JPanel {
 		transitionEditorPanel.repaint();
 	}
 
+	// SMC
+	private void setPotencySpinnerValue(int potencyNumber) {
+		potencySpinner.setValue(potencyNumber);
+	}
+
 	private void nameTextFieldFocusLost(java.awt.event.FocusEvent evt) {
 		focusLost(nameTextField);
 	}
@@ -352,6 +371,16 @@ public class TAPNTransitionEditor extends JPanel {
 
 	private boolean okButtonHandler(java.awt.event.ActionEvent evt) {
 		String newName = nameTextField.getText();
+
+		// SMC
+		int newPotency = (Integer)potencySpinner.getValue();
+		if (newPotency > 0) {
+			transition.setPotency(newPotency);
+		} else {
+			JOptionPane.showMessageDialog(this,
+			"Potency values must be above 0",
+			"Error", JOptionPane.ERROR_MESSAGE);
+		}
 		
 		// Check urgent constrain
 		if(urgentCheckBox.isSelected() && !isUrgencyOK()){
@@ -511,4 +540,8 @@ public class TAPNTransitionEditor extends JPanel {
 
 	private boolean makeNewShared = false;
 	private javax.swing.JCheckBox attributesCheckBox;
+
+	// SMC
+	private JLabel potencyLabel;
+	private javax.swing.JSpinner potencySpinner;
 }
