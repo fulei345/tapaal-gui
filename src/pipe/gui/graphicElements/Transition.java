@@ -36,6 +36,9 @@ public abstract class Transition extends PlaceTransitionObject {
 	protected static final int TRANSITION_WIDTH = TRANSITION_HEIGHT / 3;
 	
 	protected int angle;
+
+	// SMC
+	protected int potency;
 	
 	// Animation Suff
 	protected boolean highlightedDelayEnabled = false;
@@ -157,6 +160,15 @@ public abstract class Transition extends PlaceTransitionObject {
 
 	public int getAngle() {
 		return angle;
+	}
+
+	// SMC
+	public int getPotency() {
+		return potency;
+	}
+
+	public int setPotency(int new_potency) {
+		potency = new_potency;
 	}
 
 	protected void constructTransition() {
