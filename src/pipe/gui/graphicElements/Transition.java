@@ -167,6 +167,7 @@ public abstract class Transition extends PlaceTransitionObject {
 		return potency;
 	}
 
+	// SMC
 	public void setPotency(int new_potency) {
 		potency = new_potency;
 	}

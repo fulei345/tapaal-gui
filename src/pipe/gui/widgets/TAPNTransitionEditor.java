@@ -372,6 +372,7 @@ public class TAPNTransitionEditor extends JPanel {
 	private boolean okButtonHandler(java.awt.event.ActionEvent evt) {
 		String newName = nameTextField.getText();
 
+		// SMC
 		int newPotency = (Integer)potencySpinner.getValue();
 		if (newPotency > 0) {
 			transition.setPotency(newPotency);
@@ -540,7 +541,7 @@ public class TAPNTransitionEditor extends JPanel {
 	private boolean makeNewShared = false;
 	private javax.swing.JCheckBox attributesCheckBox;
 
-	/** SMC PROJECT */
+	// SMC
 	private JLabel potencyLabel;
 	private javax.swing.JSpinner potencySpinner;
 }
