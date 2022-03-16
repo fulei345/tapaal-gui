@@ -157,7 +157,6 @@ public class TAPNTransitionEditor extends JPanel {
 		setPotencySpinnerValue(transition.getPotency());
 		gridBagConstraints = GridBagHelper.as(2,2, Anchor.EAST, new Insets(3, 3, 3, 3));
 		transitionEditorPanel.add(potencySpinner, gridBagConstraints);
-		transition.setPotency((Integer)potencySpinner.getValue());
 
 		nameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
 			@Override

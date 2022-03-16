@@ -170,6 +170,7 @@ public abstract class Transition extends PlaceTransitionObject {
 	// SMC
 	public void setPotency(int new_potency) {
 		potency = new_potency;
+		System.out.print(potency);
 	}
 
 	protected void constructTransition() {
