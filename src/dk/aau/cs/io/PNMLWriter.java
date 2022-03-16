@@ -199,6 +199,11 @@ public class PNMLWriter implements NetWriter {
 		transitionElement.appendChild(name);
 		Element nameGraphics = document.createElement("graphics");
 		name.appendChild(nameGraphics);
+		// SMC potency
+		Element namePotency = document.createElement("potency");
+		name.appendChild(namePotency);
+		namePotency.setTextContent(String.valueOf(inputTransition.getPotency()));
+
 		Element nameOffset = document.createElement("offset");
 		nameGraphics.appendChild(nameOffset);
 		nameOffset.setAttribute("x", String.valueOf(Math.round(inputTransition.getNameOffsetX())));
