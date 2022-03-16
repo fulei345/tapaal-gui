@@ -70,6 +70,25 @@ public abstract class Transition extends PlaceTransitionObject {
 		updateBounds();
 	}
 
+	// SMC potency
+	public Transition(
+			int positionXInput,
+			int positionYInput,
+			String idInput,
+			int nameOffsetXInput,
+			int nameOffsetYInput,
+			int angleInput,
+			int _potency
+	){
+		super(TRANSITION_HEIGHT, TRANSITION_HEIGHT, positionXInput, positionYInput, idInput, nameOffsetXInput, nameOffsetYInput);
+
+		constructTransition();
+		angle = 0;
+		potency = _potency;
+		rotate(angleInput);
+		updateBounds();
+	}
+
 	/**
 	 * Create Petri-Net Transition object
 	 * 

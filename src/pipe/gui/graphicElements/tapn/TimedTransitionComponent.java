@@ -72,6 +72,33 @@ public class TimedTransitionComponent extends Transition {
 
 	}
 
+	public TimedTransitionComponent(
+	    int positionXInput,
+        int positionYInput,
+        String idInput,
+        int nameOffsetXInput,
+        int nameOffsetYInput,
+        boolean timedTransition,
+        boolean infServer,
+        int angleInput,
+        int priority,
+        TabContent.TAPNLens lens,
+		int potency
+    ) {
+		super(
+		    positionXInput,
+            positionYInput,
+            idInput,
+            nameOffsetXInput,
+            nameOffsetYInput,
+            angleInput
+        );
+		listener = timedTransitionListener();
+		attributesVisible = true;
+        this.lens = lens;
+
+	}
+
 	@Override
 	protected void addMouseHandler() {
 		//XXX: kyrke 2018-09-06, this is bad as we leak "this", think its ok for now, as it alwas constructed when
