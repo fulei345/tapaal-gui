@@ -72,6 +72,7 @@ public class TimedTransitionComponent extends Transition {
 
 	}
 
+	// SMC
 	public TimedTransitionComponent(
 	    int positionXInput,
         int positionYInput,
@@ -91,7 +92,8 @@ public class TimedTransitionComponent extends Transition {
             idInput,
             nameOffsetXInput,
             nameOffsetYInput,
-            angleInput
+            angleInput,
+			potency
         );
 		listener = timedTransitionListener();
 		attributesVisible = true;
