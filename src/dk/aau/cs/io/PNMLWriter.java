@@ -214,7 +214,8 @@ public class PNMLWriter implements NetWriter {
 		Element potencyText = document.createElement("text");
 		potency.appendChild(potencyText);
 		potencyText.setTextContent(String.valueOf(inputTransition.getPotency()));
-		
+		System.out.print(System.identityHashCode(inputTransition));
+
 		Element graphics = document.createElement("graphics");
 		transitionElement.appendChild(graphics);
 		Element offset = document.createElement("position");

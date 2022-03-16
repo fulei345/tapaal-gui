@@ -184,13 +184,12 @@ public abstract class Transition extends PlaceTransitionObject {
 
 	// SMC
 	public int getPotency() {
-		return potency;
+		return this.potency;
 	}
 
 	// SMC
 	public void setPotency(int new_potency) {
-		potency = new_potency;
-		System.out.print(potency);
+		this.potency = new_potency;
 	}
 
 	protected void constructTransition() {
