@@ -72,6 +72,34 @@ public class TimedTransitionComponent extends Transition {
 
 	}
 
+	// SMC
+	public TimedTransitionComponent(
+	    int positionXInput,
+        int positionYInput,
+        String idInput,
+        int nameOffsetXInput,
+        int nameOffsetYInput,
+        boolean timedTransition,
+        boolean infServer,
+        int angleInput,
+        int priority,
+        TabContent.TAPNLens lens,
+		int potency
+    ) {
+		super(
+		    positionXInput,
+            positionYInput,
+            idInput,
+            nameOffsetXInput,
+            nameOffsetYInput,
+            angleInput,
+			potency
+        );
+		listener = timedTransitionListener();
+		attributesVisible = true;
+        this.lens = lens;
+	}
+
 	@Override
 	protected void addMouseHandler() {
 		//XXX: kyrke 2018-09-06, this is bad as we leak "this", think its ok for now, as it alwas constructed when
@@ -225,7 +253,7 @@ public class TimedTransitionComponent extends Transition {
 	}
 
 	public TimedTransitionComponent copy(TimedArcPetriNet tapn) {
-		TimedTransitionComponent transitionComponent = new TimedTransitionComponent(getOriginalX(), getOriginalY(), id, getNameOffsetX(), getNameOffsetY(), true, false, getAngle(), 0, lens);
+		TimedTransitionComponent transitionComponent = new TimedTransitionComponent(getOriginalX(), getOriginalY(), id, getNameOffsetX(), getNameOffsetY(), true, false, getAngle(), 0, lens, getPotency()); // SMC copies the potency too
 		transitionComponent.setUnderlyingTransition(tapn.getTransitionByName(transition.name()));
 
 		return transitionComponent;

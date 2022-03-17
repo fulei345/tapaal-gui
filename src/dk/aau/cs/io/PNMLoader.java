@@ -219,6 +219,13 @@ public class PNMLoader {
 		return new InitialMarking(marking, offset);
 	}
 
+	private int parsePotency(Node node) {
+		
+		int potency = Integer.parseInt(getFirstDirectChild(node, "text").getTextContent());
+		
+		return potency;
+	}
+
 	private void parseTransition(Node node, TimedArcPetriNet tapn, Template template) {
 		if(!(node instanceof Element)){
 			return;
@@ -235,11 +242,18 @@ public class PNMLoader {
 		Require.that(transitions.put(id, transition) == null && !places.containsKey(id), 
 				"The id: " + id + ", was already used");
 		tapn.add(transition);
+
+		//SMC Potency
+		int potency = 1;
+		Node potencyNode  = getFirstDirectChild(node, "potency");
+		if(potencyNode != null){
+			potency = parsePotency(potencyNode);
+		}
 		
 		if(isNetDrawable()){
 			TimedTransitionComponent transitionComponent = 
 				//We parse the id as both the name and id as in tapaal name = id, and name/id has to be unique 
-				new TimedTransitionComponent(position.x, position.y, id, name.point.x, name.point.y, true, false, 0, 0, lens);
+				new TimedTransitionComponent(position.x, position.y, id, name.point.x, name.point.y, true, false, 0, 0, lens, potency);
 			transitionComponent.setUnderlyingTransition(transition);
 			template.guiModel().addPetriNetObject(transitionComponent);
 		}

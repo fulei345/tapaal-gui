@@ -38,7 +38,7 @@ public abstract class Transition extends PlaceTransitionObject {
 	protected int angle;
 
 	// SMC
-	protected int potency = 1;
+	protected int potency;
 	
 	// Animation Suff
 	protected boolean highlightedDelayEnabled = false;
@@ -65,6 +65,26 @@ public abstract class Transition extends PlaceTransitionObject {
 
 		constructTransition();
 		angle = 0;
+		potency = 1;
+		rotate(angleInput);
+		updateBounds();
+	}
+
+	// SMC potency
+	public Transition(
+			int positionXInput,
+			int positionYInput,
+			String idInput,
+			int nameOffsetXInput,
+			int nameOffsetYInput,
+			int angleInput,
+			int potencyInput
+	){
+		super(TRANSITION_HEIGHT, TRANSITION_HEIGHT, positionXInput, positionYInput, idInput, nameOffsetXInput, nameOffsetYInput);
+
+		constructTransition();
+		angle = 0;
+		potency = potencyInput;
 		rotate(angleInput);
 		updateBounds();
 	}

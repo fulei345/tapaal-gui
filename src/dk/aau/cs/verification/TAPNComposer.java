@@ -297,7 +297,8 @@ public class TAPNComposer implements ITAPNComposer {
                                 false,
                                 oldTransition.getAngle(),
                                 0,
-                                lens
+                                lens,
+								oldTransition.getPotency() // SMC
                             );
 							newTransition.setUnderlyingTransition(transition);
 							newTransition.setName(uniqueTransitionName);
