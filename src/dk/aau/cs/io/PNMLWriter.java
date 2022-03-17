@@ -198,7 +198,7 @@ public class PNMLWriter implements NetWriter {
 		Element name = document.createElement("name"); //Name
 		transitionElement.appendChild(name);
 		Element nameGraphics = document.createElement("graphics");
-		name.appendChild(nameGraphics);		
+		name.appendChild(nameGraphics);
 		Element nameOffset = document.createElement("offset");
 		nameGraphics.appendChild(nameOffset);
 		nameOffset.setAttribute("x", String.valueOf(Math.round(inputTransition.getNameOffsetX())));
