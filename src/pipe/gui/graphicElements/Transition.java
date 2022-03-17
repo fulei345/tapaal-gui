@@ -78,13 +78,13 @@ public abstract class Transition extends PlaceTransitionObject {
 			int nameOffsetXInput,
 			int nameOffsetYInput,
 			int angleInput,
-			int _potency
+			int potencyInput
 	){
 		super(TRANSITION_HEIGHT, TRANSITION_HEIGHT, positionXInput, positionYInput, idInput, nameOffsetXInput, nameOffsetYInput);
 
 		constructTransition();
 		angle = 0;
-		potency = _potency;
+		potency = potencyInput;
 		rotate(angleInput);
 		updateBounds();
 	}

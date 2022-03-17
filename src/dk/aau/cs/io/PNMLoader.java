@@ -245,9 +245,9 @@ public class PNMLoader {
 
 		//SMC Potency
 		int potency = 1;
-		Node potency_  = getFirstDirectChild(node, "potency");
-		if(potency_ != null){
-			potency = parsePotency(potency_);
+		Node potencyNode  = getFirstDirectChild(node, "potency");
+		if(potencyNode != null){
+			potency = parsePotency(potencyNode);
 		}
 		
 		if(isNetDrawable()){

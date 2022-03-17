@@ -98,7 +98,6 @@ public class TimedTransitionComponent extends Transition {
 		listener = timedTransitionListener();
 		attributesVisible = true;
         this.lens = lens;
-
 	}
 
 	@Override
