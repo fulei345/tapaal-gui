@@ -373,7 +373,7 @@ public class TAPNTransitionEditor extends JPanel {
 		String newName = nameTextField.getText();
 
 		// SMC
-		System.out.print(System.identityHashCode(transition));
+
 		int newPotency = (Integer)potencySpinner.getValue();
 		if (newPotency > 0) {
 			transition.setPotency(newPotency);

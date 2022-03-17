@@ -254,7 +254,7 @@ public class TimedTransitionComponent extends Transition {
 	}
 
 	public TimedTransitionComponent copy(TimedArcPetriNet tapn) {
-		TimedTransitionComponent transitionComponent = new TimedTransitionComponent(getOriginalX(), getOriginalY(), id, getNameOffsetX(), getNameOffsetY(), true, false, getAngle(), 0, lens);
+		TimedTransitionComponent transitionComponent = new TimedTransitionComponent(getOriginalX(), getOriginalY(), id, getNameOffsetX(), getNameOffsetY(), true, false, getAngle(), 0, lens, getPotency()); // SMC copies the potency too
 		transitionComponent.setUnderlyingTransition(tapn.getTransitionByName(transition.name()));
 
 		return transitionComponent;
