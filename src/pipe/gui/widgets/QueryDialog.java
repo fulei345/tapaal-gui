@@ -142,6 +142,12 @@ public class QueryDialog extends JPanel {
 	private JButton falsePredicateButton;
 	private JButton deadLockPredicateButton;
 
+	// SMC
+	private JPanel smcPanel;
+	private CustomJSpinner numberOfDepthsJSpinner;
+	private CustomJSpinner numberOfRunsJSpinner;
+	private JCheckBox useSMC;
+
 	// Uppaal options panel (search + trace options)
 	// search options panel
 	private JPanel searchOptionsPanel;
@@ -1256,6 +1262,7 @@ public class QueryDialog extends JPanel {
 		initReductionOptionsPanel();
 		initOverApproximationPanel();
 		initButtonPanel(option);
+		initQuerySMCPanel();
 
 		if(queryToCreateFrom != null)
 			setupFromQuery(queryToCreateFrom);
@@ -1938,6 +1945,39 @@ public class QueryDialog extends JPanel {
 		add(queryPanel, gbc);
 
 	}
+
+		// Init QuerySMCPanel
+
+		private void initQuerySMCPanel(){
+			smcPanel = new JPanel(new GridBagLayout());
+			smcPanel.setBorder(BorderFactory.createTitledBorder("SMC Options"));
+			smcPanel.setLayout(new BoxLayout(smcPanel, BoxLayout.X_AXIS));
+			smcPanel.add(new JLabel(" Number of runs:  "));
+
+			numberOfRunsJSpinner = new CustomJSpinner(1, 0, Integer.MAX_VALUE);
+			numberOfRunsJSpinner.setMaximumSize(new Dimension(65, 30));
+			numberOfRunsJSpinner.setMinimumSize(new Dimension(65, 30));
+			numberOfRunsJSpinner.setPreferredSize(new Dimension(65, 30));
+			smcPanel.add(numberOfRunsJSpinner);
+	
+			smcPanel.add(new JLabel(" Depth value:  "));
+			numberOfDepthsJSpinner = new CustomJSpinner(1, 0, Integer.MAX_VALUE);
+			numberOfDepthsJSpinner.setMaximumSize(new Dimension(65, 30));
+			numberOfDepthsJSpinner.setMinimumSize(new Dimension(65, 30));
+			numberOfDepthsJSpinner.setPreferredSize(new Dimension(65, 30));
+			smcPanel.add(numberOfDepthsJSpinner);
+
+			useReduction = new JCheckBox("Use SMC verification");
+			useReduction.setSelected(false);
+			smcPanel.add(useReduction);
+
+			GridBagConstraints gridBagConstraints = new GridBagConstraints();
+			gridBagConstraints.anchor = GridBagConstraints.WEST;
+			gridBagConstraints.gridx = 0;
+			gridBagConstraints.gridy = 4;
+			gridBagConstraints.fill = GridBagConstraints.VERTICAL;
+			add(smcPanel, gridBagConstraints);
+		}
 
 	private void initQueryField() {
 		queryField = new JTextPane();
@@ -3286,7 +3326,7 @@ public class QueryDialog extends JPanel {
 
 		gbc = new GridBagConstraints();
 		gbc.gridx = 0;
-		gbc.gridy = 4;
+		gbc.gridy = 6;
 		gbc.fill = GridBagConstraints.HORIZONTAL;
 		gbc.insets = new Insets(0, 10, 0, 10);
 		add(reductionOptionsPanel, gbc);
