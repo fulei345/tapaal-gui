@@ -1961,18 +1961,20 @@ public class QueryDialog extends JPanel {
 			numberOfRunsJSpinner.setMaximumSize(new Dimension(65, 30));
 			numberOfRunsJSpinner.setMinimumSize(new Dimension(65, 30));
 			numberOfRunsJSpinner.setPreferredSize(new Dimension(65, 30));
-			smcPanel.add(numberOfRunsJSpinner);
 	
 			smcPanel.add(new JLabel(" Depth value:  "));
 			numberOfDepthsJSpinner = new CustomJSpinner(1, 0, Integer.MAX_VALUE);
 			numberOfDepthsJSpinner.setMaximumSize(new Dimension(65, 30));
 			numberOfDepthsJSpinner.setMinimumSize(new Dimension(65, 30));
 			numberOfDepthsJSpinner.setPreferredSize(new Dimension(65, 30));
-			smcPanel.add(numberOfDepthsJSpinner);
+			
 
 			useSMC = new JCheckBox("Use SMC verification");
 			useSMC.setSelected(false);
+
 			smcPanel.add(useSMC);
+			smcPanel.add(numberOfRunsJSpinner);
+			smcPanel.add(numberOfDepthsJSpinner);
 
 			GridBagConstraints gridBagConstraints = new GridBagConstraints();
 			gridBagConstraints.anchor = GridBagConstraints.WEST;
