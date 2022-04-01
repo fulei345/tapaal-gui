@@ -476,6 +476,9 @@ public class QueryDialog extends JPanel {
         query.setUseStubbornReduction(useStubbornReduction.isSelected());
         query.setUseTarOption(useTraceRefinement.isSelected());
         query.setUseTarjan(useTarjan.isSelected());
+		query.setUseSMC(useSMC.isSelected());
+		query.setRuns((Integer)numberOfRunsJSpinner.getValue());
+		query.setRuns((Integer)numberOfDepthsJSpinner.getValue());
         return query;
     }
 
@@ -1967,9 +1970,9 @@ public class QueryDialog extends JPanel {
 			numberOfDepthsJSpinner.setPreferredSize(new Dimension(65, 30));
 			smcPanel.add(numberOfDepthsJSpinner);
 
-			useReduction = new JCheckBox("Use SMC verification");
-			useReduction.setSelected(false);
-			smcPanel.add(useReduction);
+			useSMC = new JCheckBox("Use SMC verification");
+			useSMC.setSelected(false);
+			smcPanel.add(useSMC);
 
 			GridBagConstraints gridBagConstraints = new GridBagConstraints();
 			gridBagConstraints.anchor = GridBagConstraints.WEST;

@@ -74,6 +74,10 @@ public class TAPNQuery {
 	private boolean useStubbornReduction = true;
     private boolean useTarOption = false;
     private boolean useTarjan = false;
+	
+	private boolean useSMC = false;
+	private int runs = 1000;
+	private int depth = 1000;
 
 	/**
 	 * @param name
@@ -271,6 +275,30 @@ public class TAPNQuery {
 	
 	public boolean useOverApproximation(){
 		return overApproximation;
+	}
+
+	public void setUseSMC(boolean useSMC) {
+		this.useSMC = useSMC;
+	}
+
+	public void setRuns(int runs) {
+		this.runs = runs;
+	}
+
+	public void setDepth(int depth) {
+		this.depth = depth;
+	}
+
+	public boolean useSMC() {
+		return useSMC;
+	}
+
+	public int useRuns() {
+		return runs;
+	}
+
+	public int useDepth() {
+		return depth;
 	}
 
 	/**
