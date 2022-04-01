@@ -3,6 +3,8 @@ package dk.aau.cs.verification.VerifyTAPN;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.management.Query;
+
 import pipe.dataLayer.TAPNQuery.SearchOption;
 import pipe.dataLayer.TAPNQuery.QueryReductionTime;
 import pipe.dataLayer.TAPNQuery.TraceOption;
@@ -22,6 +24,9 @@ public class VerifyPNOptions extends VerifyTAPNOptions{
 	private boolean useTarOption;
 	private String pathToReducedNet;
 	private boolean useTarjan = true;
+	private boolean useSMC = false;
+	private int runs;
+	private int depth;
 	
 	public VerifyPNOptions(int extraTokens, TraceOption traceOption, SearchOption search, boolean useOverApproximation, ModelReduction modelReduction,
                            boolean enableOverApproximation, boolean enableUnderApproximation, int approximationDenominator, QueryCategory queryCategory, AlgorithmOption algorithmOption,
@@ -37,6 +42,14 @@ public class VerifyPNOptions extends VerifyTAPNOptions{
 		this.pathToReducedNet = pathToReducedNet;
 		this.useTarjan = useTarjan;
 	}
+
+	// SMC
+	public VerifyPNOptions(int extraTokens, TraceOption traceOption, SearchOption search, boolean useOverApproximation, ModelReduction modelReduction, boolean enableOverApproximation, boolean enableUnderApproximation, int approximationDenominator, QueryCategory queryCategory, AlgorithmOption algorithmOption, boolean siphontrap, QueryReductionTime queryReduction, boolean stubbornReduction, String pathToReducedNet, boolean useTarOption, boolean useTarjan, boolean useSMC, int useRuns, int useDepth){
+		this(extraTokens, traceOption, search, useOverApproximation, modelReduction, enableOverApproximation, enableUnderApproximation, approximationDenominator, queryCategory, algorithmOption, siphontrap, queryReduction, stubbornReduction, pathToReducedNet, useTarOption, useTarjan);
+		this.useSMC = useSMC;
+		this.runs = useRuns;
+		this.depth = useDepth;
+	}	
 
 	public VerifyPNOptions(int extraTokens, TraceOption traceOption, SearchOption search, boolean useOverApproximation, boolean useModelReduction,
                            boolean enableOverApproximation, boolean enableUnderApproximation, int approximationDenominator, QueryCategory queryCategory, AlgorithmOption algorithmOption,
@@ -56,6 +69,9 @@ public class VerifyPNOptions extends VerifyTAPNOptions{
 	public String toString() {
 		StringBuilder result = new StringBuilder();
 
+		if(useSMC){
+			result.append("-smc " + runs + " " + depth + " ");
+		}
 		result.append("-k ");
 		result.append(extraTokens+tokensInModel);
 		result.append(traceMap.get(traceOption));

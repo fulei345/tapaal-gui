@@ -201,8 +201,12 @@ public class Verifier {
                 query.isStubbornReductionEnabled(),
                 reducedNetTempFile.getAbsolutePath(),
                 query.isTarOptionEnabled(),
-                query.isTarjan()
+                query.isTarjan(),
+				query.useSMC(),
+				query.useRuns(),
+				query.useDepth()
             );
+			System.out.println("big");
 		} else {
 			verifytapnOptions = new VerifyTAPNOptions(
 					bound,
@@ -216,6 +220,7 @@ public class Verifier {
 					query.isUnderApproximationEnabled(),
 					query.approximationDenominator()
 			);
+			System.out.println("small");
 		}
 		
 		if (inputQuery == null) {
