@@ -1955,14 +1955,12 @@ public class QueryDialog extends JPanel {
 			smcPanel = new JPanel(new GridBagLayout());
 			smcPanel.setBorder(BorderFactory.createTitledBorder("SMC Options"));
 			smcPanel.setLayout(new BoxLayout(smcPanel, BoxLayout.X_AXIS));
-			smcPanel.add(new JLabel(" Number of runs:  "));
-
+			
 			numberOfRunsJSpinner = new CustomJSpinner(1, 0, Integer.MAX_VALUE);
 			numberOfRunsJSpinner.setMaximumSize(new Dimension(65, 30));
 			numberOfRunsJSpinner.setMinimumSize(new Dimension(65, 30));
 			numberOfRunsJSpinner.setPreferredSize(new Dimension(65, 30));
-	
-			smcPanel.add(new JLabel(" Depth value:  "));
+			
 			numberOfDepthsJSpinner = new CustomJSpinner(1, 0, Integer.MAX_VALUE);
 			numberOfDepthsJSpinner.setMaximumSize(new Dimension(65, 30));
 			numberOfDepthsJSpinner.setMinimumSize(new Dimension(65, 30));
@@ -1973,7 +1971,9 @@ public class QueryDialog extends JPanel {
 			useSMC.setSelected(false);
 
 			smcPanel.add(useSMC);
+			smcPanel.add(new JLabel(" Number of runs:  "));
 			smcPanel.add(numberOfRunsJSpinner);
+			smcPanel.add(new JLabel(" Depth value:  "));
 			smcPanel.add(numberOfDepthsJSpinner);
 
 			GridBagConstraints gridBagConstraints = new GridBagConstraints();
