@@ -478,7 +478,7 @@ public class QueryDialog extends JPanel {
         query.setUseTarjan(useTarjan.isSelected());
 		query.setUseSMC(useSMC.isSelected());
 		query.setRuns((Integer)numberOfRunsJSpinner.getValue());
-		query.setRuns((Integer)numberOfDepthsJSpinner.getValue());
+		query.setDepth((Integer)numberOfDepthsJSpinner.getValue());
         return query;
     }
 
@@ -1301,7 +1301,16 @@ public class QueryDialog extends JPanel {
 		setupTraceOptionsFromQuery(queryToCreateFrom);
 		setupTarOptionsFromQuery(queryToCreateFrom);
         setupTarjanOptionsFromQuery(queryToCreateFrom);
+		setupSMCOptionsFromQuery(queryToCreateFrom);
 	}
+
+	private void setupSMCOptionsFromQuery(TAPNQuery queryToCreateFrom) {
+	    useSMC.setSelected(queryToCreateFrom.useSMC());
+
+		numberOfRunsJSpinner.setValue(queryToCreateFrom.useRuns());
+		numberOfDepthsJSpinner.setValue(queryToCreateFrom.useDepth());
+		numberOfDepthsJSpinner.setValue(queryToCreateFrom.useRuns());
+    }
 
 	private void setupTarOptionsFromQuery(TAPNQuery queryToCreateFrom) {
 	    if (queryToCreateFrom.isTarOptionEnabled()) {
@@ -3741,7 +3750,7 @@ public class QueryDialog extends JPanel {
 							UnderApproximation underaprx = new UnderApproximation();
 							underaprx.modifyTAPN(transformedModel.value1(), getQuery().approximationDenominator());
 						}
-
+						
 						TAPNQuery tapnQuery = getQuery();
 						dk.aau.cs.model.tapn.TAPNQuery clonedQuery = new dk.aau.cs.model.tapn.TAPNQuery(tapnQuery.getProperty().copy(), tapnQuery.getCapacity());
 
