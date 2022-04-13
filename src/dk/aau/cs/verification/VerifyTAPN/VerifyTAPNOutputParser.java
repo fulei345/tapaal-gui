@@ -21,6 +21,7 @@ public class VerifyTAPNOutputParser {
 	private static final Pattern storedPattern = Pattern.compile("\\s*stored markings:\\s*(\\d+)\\s*");
 	private static final Pattern maxUsedTokensPattern = Pattern.compile("\\s*Max number of tokens found in any reachable marking:\\s*(>)?(\\d+)\\s*");
 	private static final Pattern transitionStatsPattern = Pattern.compile("<([^:\\s]+):(\\d+)>");
+	private static final Pattern resultPattern = Pattern.compile("\\s*result percent:\\s*(\\d+|\\d+.\\d+)\\s*");
 
 	protected final int totalTokens;
 	protected final TAPNQuery query;
@@ -42,6 +43,7 @@ public class VerifyTAPNOutputParser {
 		int maxUsedTokens = 0;
 		boolean foundResult = false;
 		boolean discreteInclusion = false;
+		double percentResult = 0.0;
 		String[] lines = output.split(System.getProperty("line.separator"));
 		try {			
 			Matcher matcher = transitionStatsPattern.matcher(output);
@@ -54,6 +56,11 @@ public class VerifyTAPNOutputParser {
 				if (line.contains(Query_IS_SATISFIED_STRING)) {
 					result = true;
 					foundResult = true;
+					//SMC
+					matcher = resultPattern.matcher(line);
+					if(matcher.find()){
+						percentResult = Double.parseDouble(matcher.group(1));
+					}
 				} else if (line.contains(Query_IS_NOT_SATISFIED_STRING)) {
 					result = false;
 					foundResult = true;
@@ -79,13 +86,14 @@ public class VerifyTAPNOutputParser {
 						String operator = matcher.group(1) == null ? "" : matcher.group(1);
 						if(operator.equals(">")) maxUsedTokens += 1; // Indicate non-k-boundedness by encoding that an extra token was used.
 					}
+
 				}
 			}
 			
 			if(!foundResult) return null;
 			
 			BoundednessAnalysisResult boundedAnalysis = new BoundednessAnalysisResult(totalTokens, maxUsedTokens, extraTokens);
-			return new Tuple<QueryResult, Stats>(new QueryResult(result, boundedAnalysis, query, discreteInclusion), new Stats(discovered, explored, stored, transitionStats, placeBoundStats));
+			return new Tuple<QueryResult, Stats>(new QueryResult(result, boundedAnalysis, query, discreteInclusion, percentResult), new Stats(discovered, explored, stored, transitionStats, placeBoundStats));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
