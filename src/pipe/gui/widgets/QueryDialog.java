@@ -1309,7 +1309,6 @@ public class QueryDialog extends JPanel {
 
 		numberOfRunsJSpinner.setValue(queryToCreateFrom.useRuns());
 		numberOfDepthsJSpinner.setValue(queryToCreateFrom.useDepth());
-		numberOfDepthsJSpinner.setValue(queryToCreateFrom.useRuns());
     }
 
 	private void setupTarOptionsFromQuery(TAPNQuery queryToCreateFrom) {
