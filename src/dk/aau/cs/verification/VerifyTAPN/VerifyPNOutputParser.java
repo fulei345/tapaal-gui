@@ -21,6 +21,7 @@ public class VerifyPNOutputParser extends VerifyTAPNOutputParser{
 	private static final Pattern transitionStatsPatternUnknown = Pattern.compile("<([^:\\s]+):\\?>");
 	private static final Pattern placeBoundPattern = Pattern.compile("<([^;\\s]+);(\\d+)>");
 	private static final Pattern placeBoundPatternUnknown = Pattern.compile("<([^;\\s]+);\\?>");
+	private static final Pattern resultPattern = Pattern.compile("\\s*result percent:\\s*(\\d+|\\d+.\\d+)\\s*");
         
 	/* Reductions */
 	private static final Pattern reductionsUsedPattern = Pattern.compile("\\s*Net reduction is enabled.\\s*");
@@ -61,6 +62,7 @@ public class VerifyPNOutputParser extends VerifyTAPNOutputParser{
 		boolean reductionUsed = false;
 		boolean result = false;
 		boolean foundResult = false;
+		double percentResult = 0.0;
 		String[] lines = output.split(System.getProperty("line.separator"));
             try {
                 Matcher matcher = transitionStatsPattern.matcher(output);
@@ -166,13 +168,19 @@ public class VerifyPNOutputParser extends VerifyTAPNOutputParser{
 					if(matcher.find()){
 						ruleI = Integer.parseInt(matcher.group(1));
 					}
+					//SMC
+					matcher = resultPattern.matcher(line);
+					if(matcher.find()){
+						percentResult = Double.parseDouble(matcher.group(1));
+					}
+
 				}
 			}
 			
 			if(!foundResult) return null;
 			BoundednessAnalysisResult boundedAnalysis = new BoundednessAnalysisResult(totalTokens, maxUsedTokens, extraTokens);
 			ReductionStats reductionStats = reductionUsed? new ReductionStats(removedTransitions, removedPlaces, ruleA, ruleB, ruleC, ruleD, ruleE, ruleF, ruleG, ruleH, ruleI) : null;
-			return new Tuple<QueryResult, Stats>(new QueryResult(result, boundedAnalysis, query, false), new Stats(discovered, explored, explored, transitionStats, placeBoundStats, reductionStats));
+			return new Tuple<QueryResult, Stats>(new QueryResult(result, boundedAnalysis, query, false, percentResult), new Stats(discovered, explored, explored, transitionStats, placeBoundStats, reductionStats));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
