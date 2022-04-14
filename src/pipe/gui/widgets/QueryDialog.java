@@ -1309,7 +1309,6 @@ public class QueryDialog extends JPanel {
 
 		numberOfRunsJSpinner.setValue(queryToCreateFrom.useRuns());
 		numberOfDepthsJSpinner.setValue(queryToCreateFrom.useDepth());
-		numberOfDepthsJSpinner.setValue(queryToCreateFrom.useRuns());
     }
 
 	private void setupTarOptionsFromQuery(TAPNQuery queryToCreateFrom) {
@@ -3706,6 +3705,7 @@ public class QueryDialog extends JPanel {
 						CreateGui.getCurrentTab().setNetChanged(true);
 						exit();
 						TAPNQuery query = getQuery();
+
 
 						if(query.getReductionOption() == ReductionOption.VerifyTAPN || query.getReductionOption() == ReductionOption.VerifyTAPNdiscreteVerification || query.getReductionOption() == ReductionOption.VerifyPN)
 							Verifier.runVerifyTAPNVerification(tapnNetwork, query, false, null);
