@@ -9,6 +9,7 @@ public class QueryResult {
 	private final boolean discreteInclusion;
 	private final TAPNQuery query;
 	private final BoundednessAnalysisResult boundednessAnalysis;
+	private double percent;
 
 	public boolean isCTL = false;
 	public QueryResult(boolean satisfied, BoundednessAnalysisResult boundednessAnalysis, TAPNQuery query, boolean discreteInclusion){
@@ -16,6 +17,19 @@ public class QueryResult {
 		this.boundednessAnalysis = boundednessAnalysis;
 		this.query = query;
 		this.discreteInclusion = discreteInclusion;
+	}
+
+	// SMC
+	public QueryResult(boolean satisfied, BoundednessAnalysisResult boundednessAnalysis, TAPNQuery query, boolean discreteInclusion, double percent){
+		this.satisfied = satisfied;
+		this.boundednessAnalysis = boundednessAnalysis;
+		this.query = query;
+		this.discreteInclusion = discreteInclusion;
+		this.percent = percent;
+	}
+
+	public double getPercent() {
+		return percent;
 	}
 	
 	public boolean isQuerySatisfied() {
@@ -46,6 +60,7 @@ public class QueryResult {
 		else {
 			buffer.append("Property is ");
 			buffer.append(satisfied ? "satisfied." : "not satisfied.");
+			buffer.append("with " + percent + " probability");
 		}
 		if(shouldAddExplanation())
 			buffer.append(getExplanationString());

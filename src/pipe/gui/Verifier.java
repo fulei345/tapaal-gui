@@ -201,7 +201,10 @@ public class Verifier {
                 query.isStubbornReductionEnabled(),
                 reducedNetTempFile.getAbsolutePath(),
                 query.isTarOptionEnabled(),
-                query.isTarjan()
+                query.isTarjan(),
+				query.useSMC(),
+				query.useRuns(),
+				query.useDepth()
             );
 		} else {
 			verifytapnOptions = new VerifyTAPNOptions(
