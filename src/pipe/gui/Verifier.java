@@ -206,7 +206,6 @@ public class Verifier {
 				query.useRuns(),
 				query.useDepth()
             );
-			System.out.println("big");
 		} else {
 			verifytapnOptions = new VerifyTAPNOptions(
 					bound,
@@ -220,7 +219,6 @@ public class Verifier {
 					query.isUnderApproximationEnabled(),
 					query.approximationDenominator()
 			);
-			System.out.println("small");
 		}
 		
 		if (inputQuery == null) {

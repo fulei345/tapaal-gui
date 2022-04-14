@@ -50,12 +50,10 @@ public class VerifyTAPNOutputParser {
 			}
 			for (int i = 0; i < lines.length; i++) {
 				String line = lines[i];
-				System.out.println(line);
 				if (line.contains(DISCRETE_INCLUSION)) { discreteInclusion = true; }
 				if (line.contains(Query_IS_SATISFIED_STRING)) {
 					result = true;
 					foundResult = true;
-
 				} else if (line.contains(Query_IS_NOT_SATISFIED_STRING)) {
 					result = false;
 					foundResult = true;
