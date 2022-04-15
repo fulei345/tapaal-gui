@@ -3749,7 +3749,6 @@ public class QueryDialog extends JPanel {
 							UnderApproximation underaprx = new UnderApproximation();
 							underaprx.modifyTAPN(transformedModel.value1(), getQuery().approximationDenominator());
 						}
-						
 						TAPNQuery tapnQuery = getQuery();
 						dk.aau.cs.model.tapn.TAPNQuery clonedQuery = new dk.aau.cs.model.tapn.TAPNQuery(tapnQuery.getProperty().copy(), tapnQuery.getCapacity());
 
