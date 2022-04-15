@@ -75,7 +75,9 @@ public class VerifyPNOptions extends VerifyTAPNOptions{
 		result.append("-k ");
 		result.append(extraTokens+tokensInModel);
 		result.append(traceMap.get(traceOption));
-		result.append(searchMap.get(searchOption));
+		if(!useSMC){
+			result.append(searchMap.get(searchOption));
+		}
 		switch(getModelReduction()){
 		case AGGRESSIVE:
 			result.append(" -r 1 ");
