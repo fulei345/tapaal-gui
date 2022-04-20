@@ -60,7 +60,9 @@ public class QueryResult {
 		else {
 			buffer.append("Property is ");
 			buffer.append(satisfied ? "satisfied." : "not satisfied.");
-			buffer.append("with " + percent + " probability");
+			if(percent > 0.0){
+				buffer.append(" " + percent + "% of the runs satisfied the property");
+			}
 		}
 		if(shouldAddExplanation())
 			buffer.append(getExplanationString());
