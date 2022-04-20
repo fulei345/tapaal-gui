@@ -151,11 +151,11 @@ public class TAPNTransitionEditor extends JPanel {
 
 		// SMC
 		potencyLabel.setText("Potency:");
-		gridBagConstraints = GridBagHelper.as(1,2, Anchor.EAST, new Insets(3, 3, 3, 3));
+		gridBagConstraints = GridBagHelper.as(0,2, Anchor.EAST, new Insets(3, 3, 3, 3));
 		transitionEditorPanel.add(potencyLabel, gridBagConstraints);
 
 		setPotencySpinnerValue(transition.getPotency());
-		gridBagConstraints = GridBagHelper.as(2,2, Anchor.EAST, new Insets(3, 3, 3, 3));
+		gridBagConstraints = GridBagHelper.as(1,2, Anchor.EAST, new Insets(3, 3, 3, 3));
 		transitionEditorPanel.add(potencySpinner, gridBagConstraints);
 
 		nameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
