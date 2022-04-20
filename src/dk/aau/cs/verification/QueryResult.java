@@ -59,9 +59,9 @@ public class QueryResult {
 			buffer.append(getInconclusiveString());
 		else {
 			buffer.append("Property is ");
-			buffer.append(satisfied ? "satisfied" : "not satisfied.");
+			buffer.append(satisfied ? "satisfied." : "not satisfied.");
 			if(percent > 0.0){
-				buffer.append("with " + percent + " probability");
+				buffer.append(" " + percent + "% of the runs satisfied the property");
 			}
 		}
 		if(shouldAddExplanation())
